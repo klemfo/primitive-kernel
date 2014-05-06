@@ -21,3 +21,9 @@
 *.i*86
 *.x86_64
 *.hex
+
+# File copies
+*.*~ #if this second wildcard doesn't work, then:
+*.c~
+*.h~
+*.ld~
