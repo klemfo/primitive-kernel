@@ -39,10 +39,10 @@ SECTIONS
 		*(.bootstrap_stack)
 	}
 
-  .boot_mem BLOCK(4K) : ALIGN(4K) //I don't think I need 4K of memory, though
-  {
-    *(boot_mem_stack)
-  }
+  	.boot_mem BLOCK(4K) : ALIGN(4K) //I don't need 4K of memory, though.
+  	{
+    		*(boot_mem_stack)
+  	}
 
 	/* The compiler may produce other sections, by default it will put them in
 	   a segment with the same name. Simply add stuff here as needed. */
