@@ -36,15 +36,15 @@ uint64_t __allocate_boot_mem(boot_mem_list_t *mem_list, uint8_t order)
 	}
 
 	/*
-	 *	-> [||||||||||||||||||] ->
-	 *	-> [||||||||] -> [||||||||] ->
-	 *	-> [|||||||| -> [||||] -> [||||] -> 
+	 *	-> [||||||||||||||||||O] ->
+	 *	-> [||||||||] -> [||||||||O] ->
+	 *	-> [|||||||| -> [||||] -> [||||O] -> 
 	 */
 	if(best_fit) mem_list = best_fit; //stupid?
 	else return NULL; //not enough memory.
 	for(size_t i = mem_list->order; i != order - 1; i--) {
 		mem_list *tmp = mem_list->next;
-		mem_list->next = (mem_list - mem_list->next)/2;
+		mem_list->next = (boot_mem_list_t*)(mem_list + (mem_list - mem_list->next)/2);
 		mem_list = mem_list->next;
 		mem_list->order = i;
 		mem_list->next = tmp;
@@ -57,4 +57,12 @@ uint64_t __allocate_boot_mem(boot_mem_list_t *mem_list, uint8_t order)
 void free_boot_mem(boot_mem_list_t *mem_list, uint64_t adress)
 {
 	((boot_mem_list_t*) adress)->flags &= ~RESERVED_FLAG;
+}
+
+boot_mem_list_t *init_boot_mem(segm_t *segm)
+{
+	boot_mem_list_t *mem = (boot_mem_list_t*) segm->lenght;
+	mem->order = math_binary_log(segm->lenght);
+	mem->flags = 0;
+	return mem:
 }
