@@ -23,7 +23,7 @@
 *.hex
 
 # File copies
-*.*~ #if this second wildcard doesn't work, then:
-*.c~
-*.h~
-*.ld~
+#*.*~ #if this second wildcard doesn't work, then:
+#*.c~
+#*.h~
+#*.ld~
