@@ -3,4 +3,6 @@
 
 int start_kernel(void)
 {
+	segm_t *segm = (segm_t*) BOOT_MEM_START;
+	segm = (segm_t*) mem_boot_probe_besti_fit(segm); //will the cast work?
 }
