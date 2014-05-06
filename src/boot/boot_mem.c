@@ -35,10 +35,10 @@ uint64_t __allocate_boot_mem(boot_mem_list_t *mem_list, uint8_t order)
 		mem_list = mem_list->next;
 	}
 
-	/*
-	 *	-> [||||||||||||||||||O] ->
-	 *	-> [||||||||] -> [||||||||O] ->
-	 *	-> [|||||||| -> [||||] -> [||||O] -> 
+	/*	R indicates the left-over bytes -- ones that do not fit in mem_list->order
+	 *	-> [||||||||||||||||||R] ->
+	 *	-> [||||||||] -> [||||||||R] ->
+	 *	-> [|||||||| -> [||||] -> [||||R] -> 
 	 */
 	if(best_fit) mem_list = best_fit; //stupid?
 	else return NULL; //not enough memory.
